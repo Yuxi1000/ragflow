@@ -41,7 +41,12 @@ else
 fi
 
 # get python version
-python_version=$(python3 --version 2>&1 || python --version 2>&1 || echo "Python not installed")
+python_version=''
+if command -v python &> /dev/null; then
+    python_version=$(python --version | cut -d ' ' -f2)
+else
+    python_version="Python not installed"
+fi
 
 # Print all information
 echo "Current Repository: $git_repo_name"
